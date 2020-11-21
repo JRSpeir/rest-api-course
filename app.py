@@ -1,4 +1,7 @@
 # MUST run from top level folder e.g. code/app.py otherwise won'#t be able to find db
+
+
+import os  # for environment variables
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
@@ -9,9 +12,9 @@ from security import authenticate, identity
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 
-
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db' # you can use postgres or my sql by changing this line here
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", #DATABASE USRL FROM HEROKU POSTGRES, also at psycopg2 to requirements
+                                                       'sqlite:///database.db')  # will try sqlite after DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 api = Api(app)
 

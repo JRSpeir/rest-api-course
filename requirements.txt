@@ -4,3 +4,4 @@ SQLAlchemy
 FLASK_restful
 FLASK_SQLAlchemy
 uwsgi
+psycopg2
